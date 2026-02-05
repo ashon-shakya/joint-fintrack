@@ -1,0 +1,18 @@
+{
+    "id": 1,
+    "title": "OurWallet",
+    "description": "A personal finance web app to track income, expenses, partners, and records. Features CSV import, dashboards with analytics, user authentication, theme toggle, and partner verification.",
+    "tech": [
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "JWT",
+        "Axios"
+    ],
+    "imageUrl": "/assets/projects/financial-tracker.jpg",
+    "liveUrl": "https://your-domain.com",
+    "githubUrl": "https://github.com/yourusername/financial-tracker-app"
+}

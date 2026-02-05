@@ -1,4 +1,4 @@
-# Joint Financial Tracker
+# OurWallet
 
 A modern, full-stack personal finance tracker built with the MERN stack (MongoDB, Express, React, Node.js). It features advanced partner capabilities, allowing you to link accounts with a partner (spouse, roommate, business partner) to view shared finances, track joint expenses, and manage spending together.
 
