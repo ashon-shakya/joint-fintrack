@@ -9,6 +9,8 @@ import PartnerManagement from "../components/PartnerManagement";
 import ThemeToggle from "../components/ThemeToggle";
 import { Link } from "react-router-dom";
 
+import appIcon from '../assets/app-icon.png';
+
 const Dashboard = () => {
     const { user, logout } = useAuth();
     const [records, setRecords] = useState([]);
@@ -127,9 +129,13 @@ const Dashboard = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex items-center space-x-4">
-                            <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-[#a78bfa] dark:to-[#818cf8]">
-                                FinTrack
-                            </h1>
+                            <Link to="/" className="flex items-center space-x-2 group">
+                                <img src={appIcon} alt="OurWallet Logo" className="w-8 h-8 group-hover:scale-110 transition-transform duration-200" />
+                                <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-[#a78bfa] dark:to-[#818cf8]">
+                                    OurWallet
+                                </h1>
+                            </Link>
+
                             <div className="hidden md:flex space-x-4 ml-8">
                                 <span className="text-indigo-600 dark:text-[#a78bfa] bg-indigo-50 dark:bg-[#3e416d]/50 px-3 py-2 rounded-md font-medium">
                                     Transactions

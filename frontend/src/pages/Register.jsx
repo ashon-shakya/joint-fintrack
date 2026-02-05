@@ -3,6 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
 
+import appIcon from '../assets/app-icon.png';
+
 const Register = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -37,6 +39,9 @@ const Register = () => {
                 <div className="absolute -bottom-[50%] -right-[50%] w-[200%] h-[200%] bg-purple-100 dark:bg-[radial-gradient(circle_at_center,_#4c1d95_0%,_transparent_25%)] opacity-30 animate-pulse transition-all duration-500"></div>
             </div>
             <div className="relative bg-white dark:bg-[#242642] border border-gray-100 dark:border-[#3e416d] rounded-2xl p-8 shadow-2xl w-full max-w-md backdrop-blur-sm transition-all duration-300">
+                <div className="flex justify-center mb-6">
+                    <img src={appIcon} alt="OurWallet Logo" className="w-20 h-20" />
+                </div>
                 <h2 className="text-3xl font-bold text-gray-800 dark:text-[#b8baff] mb-2 text-center">Create Account</h2>
                 <p className="text-gray-500 dark:text-[#7a7db8] text-center mb-8">Join us to track your finances</p>
                 {error && <div className="bg-red-50 border border-red-200 text-red-600 dark:bg-red-500/10 dark:border-red-500/20 dark:text-red-400 p-3 rounded-lg mb-4 text-sm">{error}</div>}
