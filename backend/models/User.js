@@ -25,6 +25,13 @@ const userSchema = mongoose.Schema(
             status: { type: String, enum: ['PENDING', 'ACCEPTED'], default: 'PENDING' },
             initiatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
         }],
+        isVerified: {
+            type: Boolean,
+            default: false,
+        },
+        verificationToken: String,
+        resetPasswordToken: String,
+        resetPasswordExpire: Date,
 
     },
     {

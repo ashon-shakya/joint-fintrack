@@ -28,7 +28,8 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (name, email, password) => {
         const response = await api.post('/auth/register', { name, email, password });
-        if (response.data) {
+        // Only log in if token is present (which it won't be if verification is required)
+        if (response.data && response.data.token) {
             localStorage.setItem('user', JSON.stringify(response.data));
             setUser(response.data);
         }
@@ -115,11 +116,32 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const verifyEmail = async (token) => {
+        const response = await api.get(`/auth/verify/${token}`);
+        return response.data;
+    };
+
+    const forgotPassword = async (email) => {
+        const response = await api.post('/auth/forgotpassword', { email });
+        return response.data;
+    };
+
+    const resetPassword = async (token, password) => {
+        const response = await api.put(`/auth/resetpassword/${token}`, { password });
+        return response.data;
+    };
+
+    const resendVerification = async (email) => {
+        const response = await api.post('/auth/resend-verification', { email });
+        return response.data;
+    };
+
     return (
         <AuthContext.Provider value={{
             user, login, register, logout, loading,
             addSpender, removeSpender,
-            invitePartner, acceptInvite, removePartner, refreshUser
+            invitePartner, acceptInvite, removePartner, refreshUser,
+            verifyEmail, forgotPassword, resetPassword, resendVerification
         }}>
             {!loading && children}
         </AuthContext.Provider>

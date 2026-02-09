@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
@@ -9,6 +8,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+
 
 // Middleware
 app.use(helmet());
@@ -31,11 +32,20 @@ app.get('/', (req, res) => {
 const startServer = async () => {
     try {
         // Database connection
-        await connectDB();
+        connectDB().then(() => {
+            console.log(`MongoDB Connected!`);
+            app.listen(PORT, (error) => {
+                if (error) {
+                    console.error('Error starting server:', error);
+                    process.exit(1);
+                }
+                console.log(`Server running on port ${PORT}`);
+            });
 
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
+        }).catch((error) => {
+            console.error('Error connecting to database:', error);
+            process.exit(1);
+        })
     } catch (error) {
         console.error('Error starting server:', error);
         process.exit(1);

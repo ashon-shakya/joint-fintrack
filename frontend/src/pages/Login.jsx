@@ -8,17 +8,36 @@ import appIcon from '../assets/app-icon.png';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useAuth();
-    const navigate = useNavigate();
     const [error, setError] = useState('');
+    const { login, resendVerification } = useAuth();
+    const navigate = useNavigate();
+    const [showResend, setShowResend] = useState(false);
+    const [resendStatus, setResendStatus] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+        setShowResend(false);
         try {
             await login(email, password);
             navigate('/');
         } catch (err) {
-            setError(err.response?.data?.message || 'Login failed');
+            const msg = err.response?.data?.message || 'Login failed';
+            setError(msg);
+            if (msg === 'Please verify your email first') {
+                setShowResend(true);
+            }
+        }
+    };
+
+    const handleResend = async () => {
+        setResendStatus('sending');
+        try {
+            await resendVerification(email);
+            setResendStatus('sent');
+        } catch (err) {
+            setResendStatus('error');
+            setError(err.response?.data?.message || 'Failed to resend email');
         }
     };
 
@@ -37,6 +56,24 @@ const Login = () => {
                 <h2 className="text-3xl font-bold text-gray-800 dark:text-[#b8baff] mb-2 text-center">Welcome Back</h2>
                 <p className="text-gray-500 dark:text-[#7a7db8] text-center mb-8">Please sign in to continue</p>
                 {error && <div className="bg-red-50 border border-red-200 text-red-600 dark:bg-red-500/10 dark:border-red-500/20 dark:text-red-400 p-3 rounded-lg mb-4 text-sm">{error}</div>}
+
+                {showResend && (
+                    <div className="mb-6 text-center">
+                        {resendStatus === 'sent' ? (
+                            <div className="text-green-600 dark:text-green-400 text-sm mb-2">Verification email sent!</div>
+                        ) : (
+                            <button
+                                onClick={handleResend}
+                                disabled={resendStatus === 'sending'}
+                                type="button"
+                                className="text-sm font-medium text-indigo-600 dark:text-[#a78bfa] hover:text-indigo-800 dark:hover:text-[#c4b5fd] transition-colors underline"
+                            >
+                                {resendStatus === 'sending' ? 'Sending...' : 'Resend Verification Email'}
+                            </button>
+                        )}
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label className="block text-gray-700 dark:text-[#b8baff] text-sm font-medium mb-2">Email</label>
@@ -59,6 +96,11 @@ const Login = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                    </div>
+                    <div className="flex justify-end mt-2">
+                        <Link to="/forgot-password" className="text-sm font-medium text-indigo-600 dark:text-[#a78bfa] hover:text-indigo-800 dark:hover:text-[#c4b5fd] transition-colors">
+                            Forgot Password?
+                        </Link>
                     </div>
                     <button
                         type="submit"
