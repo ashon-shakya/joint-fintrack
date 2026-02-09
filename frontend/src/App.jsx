@@ -9,6 +9,7 @@ import Analytics from './pages/Analytics';
 import VerifyEmail from './pages/VerifyEmail';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import HowToUse from './pages/HowToUse';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/verify-email/:token" element={<VerifyEmail />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
+            <Route path="/how-to-use" element={<HowToUse />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<Dashboard />} />
               <Route path="/analytics" element={<Analytics />} />

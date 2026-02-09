@@ -125,6 +125,11 @@ const Register = () => {
                             Login
                         </Link>
                     </p>
+                    <div className="mt-4">
+                        <Link to="/how-to-use" className="text-sm text-gray-500 dark:text-[#7a7db8] hover:text-indigo-600 dark:hover:text-[#a78bfa] transition-colors">
+                            How does it work?
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
