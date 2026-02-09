@@ -47,7 +47,7 @@ const Login = () => {
                 <ThemeToggle />
             </div>
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] bg-purple-100 dark:bg-[radial-gradient(circle_at_center,_#4c1d95_0%,_transparent_25%)] opacity-30 animate-pulse transition-all duration-500"></div>
+                <div className="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] bg-purple-100 dark:hidden opacity-30 animate-pulse transition-all duration-500"></div>
             </div>
             <div className="relative bg-white dark:bg-[#242642] border border-gray-100 dark:border-[#3e416d] rounded-2xl p-8 shadow-2xl w-full max-w-md backdrop-blur-sm transition-all duration-300">
                 <div className="flex justify-center mb-6">
